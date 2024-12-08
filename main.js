@@ -14,19 +14,18 @@ const bot = new Client({
     partials: [Partials.Channel],
 });
 
-const ALLOWED_ROLES_TO_USE_COMMAND = ['1146866916837839046'];
+const ALLOWED_ROLES_TO_USE_COMMAND = ['ID ADMIN'];
 const TICKET_CATEGORIES = {
-    "access": "1146866918234521838",
-    "support": "1146866918234521838",
-    "partner": "1146866918234521838",
+    "access": "ID KATEGORIE VOM TICKET",
+    "support": "ID KATEGORIE VOM TICKET",
+    "partner": "ID KATEGORIE VOM TICKET",
 };
 
-const ARCHIVE_CATEGORY_NAME = "PROJEKTLEITUNG";
-const ARCHIVE_CHANNEL_NAME = "🔐│ticket-archiv";
-const SERVER_TEAM_ROLE_ID = "1146866916837839046";
-const TARGET_GUILD_ID = "1146866916825235596";
+const ARCHIVE_CATEGORY_NAME = "KATEGORIE NAME";
+const ARCHIVE_CHANNEL_NAME = "NAME VON CHANNEL";
+const SERVER_TEAM_ROLE_ID = "TEAM ID FÜR PING";
+const TARGET_GUILD_ID = "WELCHEN GUILD ER BEOBACHTET ID";
 
-// Update the bot's activity with server member count
 async function updateActivity() {
     const guild = bot.guilds.cache.get(TARGET_GUILD_ID);
     if (guild) {
@@ -38,18 +37,15 @@ async function updateActivity() {
     setTimeout(updateActivity, 60000);
 }
 
-// Bot ready event
 bot.once('ready', () => {
     console.log(`Bot is online as ${bot.user.tag}`);
     updateActivity();
 });
 
-// Check if user has the allowed role
 function hasAllowedRole(member) {
     return member.roles.cache.some(role => ALLOWED_ROLES_TO_USE_COMMAND.includes(role.id));
 }
 
-// Slash command for sending a ticket embed
 bot.on('interactionCreate', async interaction => {
     if (!interaction.isChatInputCommand()) return;
 
@@ -76,7 +72,7 @@ bot.on('interactionCreate', async interaction => {
             .setDescription("Please choose a category to create a ticket.\nA moderator will assist you shortly.")
             .setColor(0x880007)
             .setThumbnail(interaction.guild.iconURL({ dynamic: true }))
-            .setImage("https://i.postimg.cc/hPTtmb9L/v6zop3p2sb32fidi77-1.png")
+            .setImage("DIRECT URL VOM BILD EINFÜGEN ODER GIF")
             .setFooter({ text: "Powered by Jonesyyy", iconURL: "https://cdn.discordapp.com/avatars/801011337274589234/a_6a0d9f2ec8a68573280eaa8b9f060c52.gif?size=1024" });
 
         const selectMenu = new SelectMenuBuilder()
@@ -94,7 +90,6 @@ bot.on('interactionCreate', async interaction => {
     }
 });
 
-// Handle ticket creation and interaction events
 bot.on('interactionCreate', async interaction => {
     if (!interaction.isSelectMenu()) return;
 
@@ -142,4 +137,4 @@ bot.on('interactionCreate', async interaction => {
     }
 });
 
-bot.login(process.env.TOKEN);
+bot.login("DEIN TOKEN");
